@@ -2,13 +2,23 @@ package com.eriksandoval.sburrestdemoproject;
 
 import java.util.UUID;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 class Coffee {
-	private final String id;
+
+	@Id
+	private String id;
 	private String name;
 
 	public Coffee(String id, String name) {
 		this.id = id;
 		this.name = name;
+	}
+	
+	// default constructor
+	public Coffee() {
 	}
 
 	public Coffee(String name) {
@@ -25,5 +35,9 @@ class Coffee {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public void setId(String id){
+		this.id = id;
 	}
 }
