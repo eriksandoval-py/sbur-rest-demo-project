@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController // This annotation tells Spring that this class is a REST controller
 class RestAPIDemoController {
 
 	private List<Coffee> coffees = new ArrayList<>();
@@ -43,7 +45,7 @@ class RestAPIDemoController {
     }
 
     // Post Mapping for a single coffee
-    @PostMapping
+    @PostMapping("/coffees")
     Coffee postCoffee(@RequestBody Coffee coffee) {
         coffees.add(coffee);
         return coffee;
@@ -51,7 +53,7 @@ class RestAPIDemoController {
 
     // Put Mapping for a single coffee
     // If coffee already exists, update it, otherwise add it
-    @PutMapping("/{id}")
+    @PutMapping("/coffees/{id}")
     Coffee putCoffee(@PathVariable String id, @RequestBody Coffee coffee) {
         int index = -1;
         for (Coffee c: coffees) {
@@ -65,7 +67,7 @@ class RestAPIDemoController {
     }
 
     // Delete Mapping for a single coffee
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/coffees/{id}")
     void deleteCoffee(@PathVariable String id) {
         coffees.removeIf(c -> c.getId().equals(id));
     }
