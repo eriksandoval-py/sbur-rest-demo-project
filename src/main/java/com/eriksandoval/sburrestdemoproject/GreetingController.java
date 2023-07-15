@@ -9,19 +9,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/greeting")
 public class GreetingController {
 
-    @Value("${greeting-name: Mirage}")
-    private String name;
+    // Construtor injection
+    private final Greeting greeting;
 
-    @Value("${greeting-coffee: ${greeting-name} is drinking Cafe Ganador.}")
-    private String coffee;
+    public GreetingController(Greeting greeting) {
+        this.greeting = greeting;
+    }
 
     @GetMapping
     String getGreeting() {
-        return name;
+        return greeting.getName();
     }
 
     @GetMapping("/coffee")
     String getNameAndCoffee() {
-        return coffee;
+        return greeting.getCoffee();
     }    
 }
